@@ -1,0 +1,32 @@
+{
+  "name": "nachos-packages",
+  "version": "0.0.0",
+  "description": "A package to manage all nachos packages",
+  "main": "lib/index",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nachos/packages"
+  },
+  "keywords": [
+    "nachos",
+    "packages"
+  ],
+  "author": "Nachos team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nachos/packages/issues"
+  },
+  "homepage": "https://github.com/nachos/packages",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.0",
+    "jshint-stylish": "^2.0.0"
+  },
+  "dependencies": {
+    "async": "^1.2.0",
+    "jsonfile": "^2.0.1"
+  }
+}
