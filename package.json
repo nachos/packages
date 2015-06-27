@@ -4,8 +4,13 @@
   "description": "A package to manage all nachos packages",
   "main": "lib/index",
   "scripts": {
-    "test": "gulp test"
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "coveralls": "gulp coveralls"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nachos/packages"
@@ -21,13 +26,27 @@
   },
   "homepage": "https://github.com/nachos/packages",
   "devDependencies": {
+    "chai": "^3.0.0",
+    "chai-as-promised": "^5.1.0",
+    "git-validate": "^2.0.2",
     "gulp": "^3.9.0",
+    "gulp-bump": "^0.3.1",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-istanbul": "^0.10.0",
+    "gulp-jscs": "^1.6.0",
     "gulp-jshint": "^1.11.0",
-    "jshint-stylish": "^2.0.0"
+    "gulp-mocha": "^2.1.2",
+    "jshint-stylish": "^2.0.0",
+    "lazypipe": "^0.2.4",
+    "mockery": "^1.4.0",
+    "run-sequence": "^1.1.1",
+    "sinon": "^1.15.3",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "async": "^1.2.0",
+    "async": "^1.2.1",
     "debug": "^2.2.0",
-    "jsonfile": "^2.0.1"
+    "jsonfile": "^2.0.1",
+    "q": "^1.4.1"
   }
 }
