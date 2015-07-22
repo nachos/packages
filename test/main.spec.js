@@ -24,10 +24,8 @@ describe('packages', function () {
       var packages;
 
       beforeEach(function () {
-        var nachosConfigMock = function () {
-          return {
-            get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-          };
+        var nachosConfigMock = {
+          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
         };
 
         mockery.registerMock('nachos-config', nachosConfigMock);
@@ -65,10 +63,8 @@ describe('packages', function () {
       var packages;
 
       beforeEach(function () {
-        var nachosConfigMock = function () {
-          return {
-            get: sinon.stub().returns(Q.resolve({}))
-          };
+        var nachosConfigMock = {
+          get: sinon.stub().returns(Q.resolve({}))
         };
 
         var nachosHomeMock = sinon.stub().returns('home/path');
@@ -112,10 +108,8 @@ describe('packages', function () {
       before(function () {
         stub = sinon.stub().returns(Q.resolve({packages: 'path'}));
 
-        var nachosConfigMock = function () {
-          return {
-            get: stub
-          };
+        var nachosConfigMock = {
+          get: stub
         };
 
         mockery.registerMock('nachos-config', nachosConfigMock);
@@ -147,10 +141,8 @@ describe('packages', function () {
     var fs = require('fs');
 
     beforeEach(function () {
-      var nachosConfigMock = function () {
-        return {
-          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-        };
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
       sinon.stub(fs, 'access', function (file, cb) {
@@ -208,10 +200,8 @@ describe('packages', function () {
     var packages;
 
     beforeEach(function () {
-      var nachosConfigMock = function () {
-        return {
-          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-        };
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
       mockery.registerMock('nachos-config', nachosConfigMock);
@@ -279,10 +269,8 @@ describe('packages', function () {
     var packages;
 
     beforeEach(function () {
-      var nachosConfigMock = function () {
-        return {
-          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-        };
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
       mockery.registerMock('nachos-config', nachosConfigMock);
@@ -406,10 +394,8 @@ describe('packages', function () {
     var packages;
 
     beforeEach(function () {
-      var nachosConfigMock = function () {
-        return {
-          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-        };
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
       mockery.registerMock('nachos-config', nachosConfigMock);
@@ -468,10 +454,8 @@ describe('packages', function () {
     var packages;
 
     beforeEach(function () {
-      var nachosConfigMock = function () {
-        return {
-          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-        };
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
       mockery.registerMock('nachos-config', nachosConfigMock);
@@ -530,10 +514,8 @@ describe('packages', function () {
     var packages;
 
     beforeEach(function () {
-      var nachosConfigMock = function () {
-        return {
-          get: sinon.stub().returns(Q.resolve({packages: 'path'}))
-        };
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
       mockery.registerMock('nachos-config', nachosConfigMock);
