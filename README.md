@@ -48,32 +48,31 @@ $ [sudo] npm install nachos-packages --save
 var packages = require('nachos-packages');
 ```
 
-### Examples
-#### TYPES
+### TYPES
 Returns the available packages types
 ``` js
 var types = packages.Packages.TYPES;
 ```
 
-#### getFolderByType(type)
+### getFolderByType(type)
 Get folder by specific type
 ``` js
 packages.getFolderByType('dip')
   .then(function (folder) {
-    // ...
+    // folder -> user/home/.nachos/packages/dips
   });
 ```
 
-#### getFolderByPackage(packageName)
+### getFolderByPackage(packageName)
 Get folder by specific package
 ``` js
 packages.getFolderByPackage('your-package')
   .then(function (folder) {
-    // ...
+    // folder -> user/home/.nachos/packages/type
   });
 ```
 
-#### getPackage(packageName, type)
+### getPackage(packageName, type)
 Get specific package by type
 ``` js
 packages.getPackage('your-package', 'dip')
@@ -87,7 +86,7 @@ packages.getPackage('your-package', 'dip')
   });
 ```
 
-#### getByType(type, full [optional])
+### getByType(type, [full])
 Get all packages with specific type
 ``` js
 packages.getByType('dip')
@@ -119,7 +118,7 @@ packages.getByType('dip', true)
   });
 ```
 
-#### getDip(dipName)
+### getDip(dipName)
 Get dip by name
 ``` js
 packages.getDip('your-dip')
@@ -133,7 +132,7 @@ packages.getDip('your-dip')
   });
 ```
 
-#### getTaco(tacoName)
+### getTaco(tacoName)
 Get taco by its name
 ``` js
 packages.getTaco('your-taco')
@@ -147,7 +146,7 @@ packages.getTaco('your-taco')
   });
 ```
 
-#### getAll(full [optional])
+### getAll([full])
 Get all packages of all types
 ``` js
 packages.getAll()
