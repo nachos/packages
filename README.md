@@ -42,7 +42,7 @@ Manage all nachos packages
 $ [sudo] npm install nachos-packages --save
 ```
 
-## Examples
+## Usage
 ### Initialize
 ``` js
 var packages = require('nachos-packages');
