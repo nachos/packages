@@ -1,8 +1,8 @@
 {
   "name": "nachos-packages",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package to manage all nachos packages",
-  "main": "lib/index",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "gulp lint",
     "test": "gulp test",
@@ -47,6 +47,8 @@
     "debug": "^2.2.0",
     "jsonfile": "^2.2.1",
     "lodash": "^3.10.0",
+    "nachos-config": "^1.0.0",
+    "nachos-home": "^1.0.1",
     "q": "^1.4.1"
   }
 }
