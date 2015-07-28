@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
+    "fs-access": "^1.0.0",
     "jsonfile": "^2.2.1",
     "lodash": "^3.10.0",
     "nachos-config": "^1.0.0",

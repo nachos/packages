@@ -138,14 +138,13 @@ describe('packages', function () {
 
   describe('get folder by package', function () {
     var packages;
-    var fs = require('fs');
 
     beforeEach(function () {
       var nachosConfigMock = {
         get: sinon.stub().returns(Q.resolve({packages: 'path'}))
       };
 
-      sinon.stub(fs, 'access', function (file, cb) {
+      var fsAccessMock = function (file, cb) {
         if (file.indexOf('notExist') !== -1) {
           return cb({code: 'ENOENT'});
         }
@@ -159,8 +158,9 @@ describe('packages', function () {
         }
 
         return cb({code: 'ENOENT'});
-      });
+      };
 
+      mockery.registerMock('fs-access', fsAccessMock);
       mockery.registerMock('nachos-config', nachosConfigMock);
       mockery.enable({
         useCleanCache: true,
@@ -172,9 +172,9 @@ describe('packages', function () {
     });
 
     afterEach(function () {
+      mockery.deregisterMock('fs-access');
       mockery.deregisterMock('nachos-config');
       mockery.disable();
-      fs.access.restore();
     });
 
     describe('with existing package in dips folder', function () {
