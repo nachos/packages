@@ -72,8 +72,23 @@ packages.getFolderByPackage('your-package')
   });
 ```
 
-### getPackage(packageName, type)
-Get specific package by type
+### getPackage(packageName, [type])
+Get specific package
+#### By name
+``` js
+packages.getPackage('your-package')
+  .then(function (packageConfig) {
+    /** packageConfig: 
+        {
+          path: 'path/to/your/package',
+          type: 'package-type',
+          config: { ... } // -> nachos.json of the package
+        }
+    */
+  });
+```
+
+#### By name and type
 ``` js
 packages.getPackage('your-package', 'dip')
   .then(function (packageConfig) {
