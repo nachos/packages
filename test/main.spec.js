@@ -219,48 +219,93 @@ describe('packages', function () {
       mockery.disable();
     });
 
-    describe('with existing package in dips folder', function () {
-      before(function () {
-        var jfMock = {
-          readFile: sinon.stub().callsArgWith(1, null, {test: 'test'})
-        };
+    describe('by name', function () {
+      describe('with existing package in tacos folder', function () {
+        before(function () {
+          var jfMock = {
+            readFile: sinon.stub().callsArgWith(1, null, {test: 'test'})
+          };
+          var fsMock = {
+            readdir: sinon.stub().callsArgWith(1, null, ['test', 'pkg2']),
+            stat: sinon.stub().callsArgWith(1, null, {
+              isDirectory: function () {
+                return true;
+              }
+            })
+          };
 
-        mockery.registerMock('jsonfile', jfMock);
+          mockery.registerMock('fs', fsMock);
+          mockery.registerMock('jsonfile', jfMock);
+        });
+
+        after(function () {
+          mockery.deregisterMock('fs');
+          mockery.deregisterMock('jsonfile');
+        });
+
+        it('should return \'test\' package with full config', function () {
+          return expect(packages.getPackage('test')).to.eventually.be.deep.equals({
+            name: 'test',
+            path: path.join('path', 'tacos', 'test'),
+            type: 'taco',
+            config: {
+              test: 'test'
+            }
+          });
+        });
       });
 
-      after(function () {
-        mockery.deregisterMock('jsonfile');
-      });
-
-      it('should return \'test\' package', function () {
-        return expect(packages.getPackage('test', 'dip')).to.eventually.be.deep.equals({
-          path: path.join('path', 'dips', 'test'),
-          config: {test: 'test'}
+      describe('with non-existing package in dips folder', function () {
+        it('should be rejected with error "dip doesn\'t exist"', function () {
+          return expect(packages.getPackage('test')).to.eventually.be.rejectedWith('Could not find package named test');
         });
       });
     });
 
-    describe('with existing package in dips folder and no permissions', function () {
-      before(function () {
-        var jfMock = {
-          readFile: sinon.stub().callsArgWith(1, {code: 'ENOPER'})
-        };
+    describe('by name and type', function () {
+      describe('with existing package in dips folder', function () {
+        before(function () {
+          var jfMock = {
+            readFile: sinon.stub().callsArgWith(1, null, {test: 'test'})
+          };
 
-        mockery.registerMock('jsonfile', jfMock);
+          mockery.registerMock('jsonfile', jfMock);
+        });
+
+        after(function () {
+          mockery.deregisterMock('jsonfile');
+        });
+
+        it('should return \'test\' package', function () {
+          return expect(packages.getPackage('test', 'dip')).to.eventually.be.deep.equals({
+            path: path.join('path', 'dips', 'test'),
+            config: {test: 'test'}
+          });
+        });
       });
 
-      after(function () {
-        mockery.deregisterMock('jsonfile');
+      describe('with existing package in dips folder and no permissions', function () {
+        before(function () {
+          var jfMock = {
+            readFile: sinon.stub().callsArgWith(1, {code: 'ENOPER'})
+          };
+
+          mockery.registerMock('jsonfile', jfMock);
+        });
+
+        after(function () {
+          mockery.deregisterMock('jsonfile');
+        });
+
+        it('should return \'test\' package', function () {
+          return expect(packages.getPackage('test', 'dip')).to.eventually.be.rejectedWith({code: 'ENOPER'});
+        });
       });
 
-      it('should return \'test\' package', function () {
-        return expect(packages.getPackage('test', 'dip')).to.eventually.be.rejectedWith({code: 'ENOPER'});
-      });
-    });
-
-    describe('with non-existing package in dips folder', function () {
-      it('should be rejected with error "dip doesn\'t exist"', function () {
-        return expect(packages.getPackage('test', 'dip')).to.eventually.be.rejectedWith('dip doesn\'t exist');
+      describe('with non-existing package in dips folder', function () {
+        it('should be rejected with error "dip doesn\'t exist"', function () {
+          return expect(packages.getPackage('test', 'dip')).to.eventually.be.rejectedWith('dip doesn\'t exist');
+        });
       });
     });
   });
