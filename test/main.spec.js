@@ -15,7 +15,7 @@ describe('packages', function () {
     it('should return list of types', function () {
       var packages = require('../lib');
 
-      expect(packages.Packages.TYPES).to.have.length(2);
+      expect(packages.Packages.TYPES).to.have.length(3);
     });
   });
 
@@ -531,7 +531,7 @@ describe('packages', function () {
         mockery.deregisterMock('jsonfile');
       });
 
-      it('should eventually return the config of the dip', function () {
+      it('should eventually return the config of the taco', function () {
         return expect(packages.getTaco('test')).to.eventually.be.an.object;
       });
     });
@@ -549,8 +549,68 @@ describe('packages', function () {
         mockery.deregisterMock('jsonfile');
       });
 
-      it('should eventually return the config of the dip', function () {
+      it('should eventually return the config of the taco', function () {
         return expect(packages.getTaco('test')).to.eventually.to.have.property('config', null);
+      });
+    });
+  });
+
+  describe('get burrito', function () {
+    var packages;
+
+    beforeEach(function () {
+      var nachosConfigMock = {
+        get: sinon.stub().returns(Q.resolve({packages: 'path'}))
+      };
+
+      mockery.registerMock('nachos-config', nachosConfigMock);
+      mockery.enable({
+        useCleanCache: true,
+        warnOnReplace: false,
+        warnOnUnregistered: false
+      });
+
+      packages = require('../lib');
+    });
+
+    afterEach(function () {
+      mockery.deregisterMock('nachos-config');
+      mockery.disable();
+    });
+
+    describe('with valid burrito name', function () {
+      before(function () {
+        var jfMock = {
+          readFile: sinon.stub().callsArgWith(1, null, {test: 'test'})
+        };
+
+        mockery.registerMock('jsonfile', jfMock);
+      });
+
+      after(function () {
+        mockery.deregisterMock('jsonfile');
+      });
+
+      it('should eventually return the config of the burrito', function () {
+        return expect(packages.getBurrito('test')).to.eventually.be.an.object;
+      });
+    });
+
+    describe('with non-valid burrito name', function () {
+      before(function () {
+        var jfMock = {
+          readFile: sinon.stub().callsArgWith(1, null, null)
+        };
+
+        mockery.registerMock('jsonfile', jfMock);
+      });
+
+      after(function () {
+        mockery.deregisterMock('jsonfile');
+      });
+
+      it('should eventually return the config of the burrito', function () {
+        return expect(packages.getBurrito('test')).to.eventually.to.have.property('config', null);
       });
     });
   });
